@@ -1,1 +1,1 @@
-# mini_project_fullstack
+# mini_project_fullstack bridgelabz
