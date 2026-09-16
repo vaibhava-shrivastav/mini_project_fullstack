@@ -48,14 +48,19 @@ npm run dev
 
 ## Git Workflow (for all members)
 
+Repo: https://github.com/vaibhava-shrivastav/mini_project_fullstack.git
+Branch flow: `feature/*` → PR → `dev` → PR → `main`
+
 ### 1. Clone repo (first time only)
 ```bash
-git clone <repo-url>
-cd placement-system
+git clone https://github.com/vaibhava-shrivastav/mini_project_fullstack.git
+cd mini_project_fullstack
 ```
 
-### 2. Create your feature branch
+### 2. Create your feature branch (from dev)
 ```bash
+git checkout dev
+git pull origin dev
 git checkout -b feature/<your-module-name>
 ```
 
@@ -66,18 +71,22 @@ git commit -m "your commit message"
 git push origin feature/<your-module-name>
 ```
 
-### 4. Switch back to main branch
+### 4. Open a Pull Request: `feature/<your-module-name>` → `dev`
+Merge on GitHub after review.
+
+### 5. Once dev is stable, open a Pull Request: `dev` → `main`
+Merge on GitHub to finalize the milestone.
+
+### 6. Switch back to dev branch and sync
 ```bash
-git checkout main
-git pull origin main
+git checkout dev
+git pull origin dev
 ```
 
-### 5. If branch already exists, just switch to it
+### 7. If your branch already exists, just switch to it
 ```bash
 git checkout feature/<your-module-name>
 ```
-
-Then create a Pull Request on GitHub to merge into `main`.
 
 ## Milestone Scope (30%)
 - Project structure and routing
