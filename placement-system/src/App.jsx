@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Opportunities from "./pages/Opportunities";
 import Career from "./pages/Career";
 import Notifications from "./pages/Notifications";
+import "./App.css";
 
 export default function App() {
   return (
