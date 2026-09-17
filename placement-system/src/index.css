@@ -39,3 +39,6 @@ td {
   padding: 0.5rem;
   text-align: left;
 }
+input[type="text"] { padding: 0.5rem; width: 100%; margin: 1rem 0; box-sizing: border-box; }
+.job-list { display: flex; flex-direction: column; gap: 1rem; }
+.job-card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; }
