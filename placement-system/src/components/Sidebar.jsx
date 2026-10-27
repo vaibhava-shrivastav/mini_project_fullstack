@@ -6,6 +6,7 @@ export default function Sidebar() {
     { to: "/opportunities", label: "Placement Opportunities" },
     { to: "/career", label: "Career Management" },
     { to: "/notifications", label: "Notifications" },
+    { to: "/statistics", label: "Statistics" },
   ];
   return (
     <aside className="sidebar">

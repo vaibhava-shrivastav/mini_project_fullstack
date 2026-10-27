@@ -5,8 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import Opportunities from "./pages/Opportunities";
 import Career from "./pages/Career";
 import Notifications from "./pages/Notifications";
+import Statistics from "./pages/Statistics";
 import "./App.css";
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +19,7 @@ export default function App() {
             <Route path="/opportunities" element={<Opportunities />} />
             <Route path="/career" element={<Career />} />
             <Route path="/notifications" element={<Notifications />} />
+            <Route path="/statistics" element={<Statistics />} />
           </Routes>
         </main>
       </div>
