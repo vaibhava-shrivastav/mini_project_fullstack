@@ -1,14 +1,15 @@
 import { useState } from "react";
-import { opportunities } from "../data/opportunitiesData";
+import { useData } from "../context/DataContext";
 import OpportunityCard from "../components/OpportunityCard";
 
 export default function Opportunities() {
+  const { drives = [] } = useData();
   const [search, setSearch] = useState("");
 
-  const filtered = opportunities.filter(
-    (job) =>
-      job.role.toLowerCase().includes(search.toLowerCase()) ||
-      job.company.toLowerCase().includes(search.toLowerCase())
+  const filtered = drives.filter((job) =>
+    `${job.role || ""} ${job.company || ""} ${(job.skills || []).join(" ")}`
+      .toLowerCase()
+      .includes(search.toLowerCase())
   );
 
   return (
@@ -17,14 +18,18 @@ export default function Opportunities() {
 
       <input
         type="text"
-        placeholder="Search by company or role"
+        placeholder="Search by company, role or skill"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <div className="job-list">
-        {filtered.map((job, i) => (
-          <OpportunityCard key={i} job={job} />
+      {filtered.length === 0 && (
+        <p className="empty">No matching drives found.</p>
+      )}
+
+      <div className="job-grid">
+        {filtered.map((job) => (
+          <OpportunityCard key={job.id} job={job} />
         ))}
       </div>
     </div>
