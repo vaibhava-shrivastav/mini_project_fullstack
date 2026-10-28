@@ -8,6 +8,7 @@ import Career from "./pages/Career";
 import Notifications from "./pages/Notifications";
 import Statistics from "./pages/Statistics";
 import Resume from "./pages/Resume";
+import Tracking from "./pages/Tracking";
 import "./App.css";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/resume" element={<Resume />} />
+            <Route path="/tracking" element={<Tracking />} />
           </Routes>
         </main>
       </div>

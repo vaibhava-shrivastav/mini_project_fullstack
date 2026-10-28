@@ -9,6 +9,7 @@ export default function Sidebar() {
     { to: "/notifications", label: "Notifications" },
     { to: "/statistics", label: "Statistics" },
     { to: "/resume", label: "Resume" },
+    { to: "/tracking", label: "Application Tracking" },
   ];
 
   return (
