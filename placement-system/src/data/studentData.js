@@ -7,7 +7,16 @@ export const student = {
 };
 
 export const applications = [
-  { company: "TCS", status: "Applied" },
-  { company: "Infosys", status: "Shortlisted" },
-  { company: "Wipro", status: "Interview Scheduled" },
+  { company: "TCS", stage: 2 },
+  { company: "Infosys", stage: 3 },
+  { company: "Wipro", stage: 1 },
 ];
+
+export const stages = [
+  "Not Applied",
+  "Applied",
+  "Shortlisted",
+  "Interview Scheduled",
+  "Selected",
+];
+

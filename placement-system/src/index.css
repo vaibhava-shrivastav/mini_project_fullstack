@@ -66,3 +66,26 @@ input[type="text"] { padding: 0.5rem; width: 100%; margin: 1rem 0; box-sizing: b
   color: green;
   font-size: 0.85rem;
 }
+
+
+.tracker-item {
+  margin-bottom: 1.5rem;
+}
+
+.tracker-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.step {
+  padding: 0.3rem 0.6rem;
+  background: #eee;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.step.active {
+  background: #1b3a2b;
+  color: white;
+}
