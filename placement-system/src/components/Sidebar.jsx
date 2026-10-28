@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -7,12 +8,16 @@ export default function Sidebar() {
     { to: "/career", label: "Career Management" },
     { to: "/notifications", label: "Notifications" },
     { to: "/statistics", label: "Statistics" },
+    { to: "/resume", label: "Resume" },
   ];
+
   return (
     <aside className="sidebar">
       <ul>
         {links.map((l) => (
-          <li key={l.to}><Link to={l.to}>{l.label}</Link></li>
+          <li key={l.to}>
+            <Link to={l.to}>{l.label}</Link>
+          </li>
         ))}
       </ul>
     </aside>

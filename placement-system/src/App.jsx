@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -6,7 +7,9 @@ import Opportunities from "./pages/Opportunities";
 import Career from "./pages/Career";
 import Notifications from "./pages/Notifications";
 import Statistics from "./pages/Statistics";
+import Resume from "./pages/Resume";
 import "./App.css";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -20,6 +23,7 @@ export default function App() {
             <Route path="/career" element={<Career />} />
             <Route path="/notifications" element={<Notifications />} />
             <Route path="/statistics" element={<Statistics />} />
+            <Route path="/resume" element={<Resume />} />
           </Routes>
         </main>
       </div>
