@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 export default function Sidebar() {
@@ -10,6 +9,7 @@ export default function Sidebar() {
     { to: "/statistics", label: "Statistics" },
     { to: "/resume", label: "Resume" },
     { to: "/tracking", label: "Application Tracking" },
+    { to: "/admin", label: "Admin" },
   ];
 
   return (
