@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
@@ -9,6 +8,7 @@ import Notifications from "./pages/Notifications";
 import Statistics from "./pages/Statistics";
 import Resume from "./pages/Resume";
 import Tracking from "./pages/Tracking";
+import Admin from "./pages/Admin";
 import "./App.css";
 
 export default function App() {
@@ -26,6 +26,7 @@ export default function App() {
             <Route path="/statistics" element={<Statistics />} />
             <Route path="/resume" element={<Resume />} />
             <Route path="/tracking" element={<Tracking />} />
+            <Route path="/admin" element={<Admin />} />
           </Routes>
         </main>
       </div>
