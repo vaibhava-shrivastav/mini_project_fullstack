@@ -1,19 +1,28 @@
 
 import { useState } from "react";
+import { useData } from "../context/DataContext";
+import { stages } from "../data/studentData";
 import DriveForm from "../components/DriveForm";
 
 export default function Admin() {
-  const [drives, setDrives] = useState([]);
+  const {
+    drives,
+    addDrive,
+    deleteDrive,
+    applications,
+    updateStage,
+    announcements,
+    addAnnouncement,
+    deleteAnnouncement
+  } = useData();
 
-  const addDrive = (form) => {
-    setDrives((previous) => [
-      ...previous,
-      { ...form, id: Date.now() },
-    ]);
-  };
+  const [text, setText] = useState("");
+  const [type, setType] = useState("announcement");
 
-  const deleteDrive = (id) => {
-    setDrives((previous) => previous.filter((drive) => drive.id !== id));
+  const publish = (e) => {
+    e.preventDefault();
+    addAnnouncement(text, type);
+    setText("");
   };
 
   return (
@@ -27,19 +36,12 @@ export default function Admin() {
 
       <div className="panel">
         <h3>All Drives ({drives.length})</h3>
-
-        {drives.length === 0 && (
-          <p className="empty">No drives added yet.</p>
-        )}
+        {drives.length === 0 && <p className="empty">No drives added yet.</p>}
 
         <table>
           <thead>
             <tr>
-              <th>Company</th>
-              <th>Role</th>
-              <th>Package</th>
-              <th>Deadline</th>
-              <th>Action</th>
+              <th>Company</th><th>Role</th><th>Package</th><th>Deadline</th><th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -50,10 +52,7 @@ export default function Admin() {
                 <td>{d.package}</td>
                 <td>{d.deadline}</td>
                 <td>
-                  <button
-                    className="btn btn-danger"
-                    onClick={() => deleteDrive(d.id)}
-                  >
+                  <button className="btn btn-danger" onClick={() => deleteDrive(d.id)}>
                     Delete
                   </button>
                 </td>
@@ -61,6 +60,64 @@ export default function Admin() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="panel">
+        <h3>Update Application Status</h3>
+        {applications.length === 0 && <p className="empty">No student applications yet.</p>}
+
+        <table>
+          <thead>
+            <tr><th>Company</th><th>Role</th><th>Stage</th></tr>
+          </thead>
+          <tbody>
+            {applications.map((a) => (
+              <tr key={a.driveId}>
+                <td>{a.company}</td>
+                <td>{a.role}</td>
+                <td>
+                  <select
+                    value={a.stage}
+                    onChange={(e) => updateStage(a.driveId, Number(e.target.value))}
+                  >
+                    {stages.map((s, i) => (
+                      <option key={s} value={i}>{s}</option>
+                    ))}
+                  </select>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="panel">
+        <h3>Publish Announcement</h3>
+        <form className="drive-form" onSubmit={publish}>
+          <input
+            value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Announcement text"
+            required
+          />
+          <select value={type} onChange={(e) => setType(e.target.value)}>
+            <option value="announcement">Announcement</option>
+            <option value="deadline">Deadline</option>
+            <option value="interview">Interview</option>
+          </select>
+          <button type="submit" className="btn">Publish</button>
+        </form>
+
+        <ul className="notif-list">
+          {announcements.map((a) => (
+            <li key={a.id} className={`notif ${a.type}`}>
+              {a.text}{" "}
+              <button className="btn btn-danger" onClick={() => deleteAnnouncement(a.id)}>
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
