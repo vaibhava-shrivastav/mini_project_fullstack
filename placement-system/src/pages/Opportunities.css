@@ -1,0 +1,5 @@
+.filter-row { display: flex; gap: 0.7rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.filter-row input[type="text"] { flex: 2; min-width: 200px; margin-bottom: 0; }
+.filter-row select { flex: 1; min-width: 140px; padding: 0.55rem; border: 1px solid var(--border); border-radius: 6px; background: var(--card); }
+.elig-yes { color: var(--accent); font-weight: 600; font-size: 0.85rem; }
+.elig-no { color: #c0392b; font-weight: 600; font-size: 0.85rem; }
