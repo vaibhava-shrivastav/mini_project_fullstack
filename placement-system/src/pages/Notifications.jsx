@@ -1,43 +1,24 @@
-import notifications from "../data/notificationsData";
+
+import { useData } from "../context/DataContext";
 
 export default function Notifications() {
+  const { announcements } = useData();
+
   return (
-    <div className="notifications-page">
-      <div className="notifications-header">
-        <h1>Notifications</h1>
-        <p>Stay updated with placement and career-related announcements.</p>
-      </div>
+    <div>
+      <h2>Notifications</h2>
 
-      <div className="notifications-list">
-        {notifications.map((notification) => (
-          <div
-            className={`notification-card ${
-              notification.read ? "read" : "unread"
-            }`}
-            key={notification.id}
-          >
-            <div className="notification-content">
-              <div className="notification-top">
-                <span className="notification-type">
-                  {notification.type}
-                </span>
+      {announcements.length === 0 && (
+        <p className="empty">No notifications right now.</p>
+      )}
 
-                <span className="notification-date">
-                  {notification.date}
-                </span>
-              </div>
-
-              <h2>{notification.title}</h2>
-
-              <p>{notification.message}</p>
-            </div>
-
-            {!notification.read && (
-              <span className="unread-badge">New</span>
-            )}
-          </div>
+      <ul className="notif-list">
+        {announcements.map((n) => (
+          <li key={n.id} className={`notif ${n.type}`}>
+            {n.text}
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

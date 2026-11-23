@@ -1,0 +1,40 @@
+
+.resume-wrap {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.resume-wrap .resume-form {
+  flex: 1;
+  min-width: 280px;
+}
+
+.resume-preview {
+  flex: 1;
+  min-width: 280px;
+  white-space: pre-wrap;
+}
+
+.resume-preview h4 {
+  margin: 0.8rem 0 0.2rem;
+  color: var(--primary);
+}
+
+.resume-preview p {
+  margin: 0;
+}
+
+@media print {
+  .navbar,
+  .sidebar,
+  .no-print {
+    display: none !important;
+  }
+
+  .resume-preview {
+    border: none;
+    box-shadow: none;
+  }
+}
