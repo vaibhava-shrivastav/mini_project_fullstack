@@ -1,20 +1,25 @@
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+
+const links = [
+  { to: "/", label: "Dashboard", roles: ["student"] },
+  { to: "/opportunities", label: "Opportunities", roles: ["student"] },
+  { to: "/tracking", label: "Application Tracking", roles: ["student"] },
+  { to: "/profile", label: "Profile", roles: ["student"] },
+  { to: "/resume", label: "Resume", roles: ["student"] },
+  { to: "/career", label: "Career Management", roles: ["student"] },
+  { to: "/notifications", label: "Notifications", roles: ["student", "admin"] },
+  { to: "/statistics", label: "Statistics", roles: ["student", "admin"] },
+  { to: "/admin", label: "Admin", roles: ["admin"] },
+];
 
 export default function Sidebar() {
-  const links = [
-    { to: "/", label: "Dashboard" },
-    { to: "/opportunities", label: "Opportunities" },
-    { to: "/tracking", label: "Application Tracking" },
-    { to: "/resume", label: "Resume" },
-    { to: "/career", label: "Career Management" },
-    { to: "/notifications", label: "Notifications" },
-    { to: "/statistics", label: "Statistics" },
-    { to: "/admin", label: "Admin" },
-  ];
+  const { user } = useAuth();
+
   return (
     <aside className="sidebar">
       <ul>
-        {links.map((l) => (
+        {links.filter((l) => l.roles.includes(user.role)).map((l) => (
           <li key={l.to}>
             <NavLink to={l.to} end={l.to === "/"} className={({ isActive }) => (isActive ? "active" : "")}>
               {l.label}
