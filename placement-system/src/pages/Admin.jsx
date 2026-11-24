@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useData } from "../context/DataContext";
 import { stages } from "../data/studentData";
@@ -13,7 +12,7 @@ export default function Admin() {
     updateStage,
     announcements,
     addAnnouncement,
-    deleteAnnouncement
+    deleteAnnouncement,
   } = useData();
 
   const [text, setText] = useState("");
@@ -21,7 +20,8 @@ export default function Admin() {
 
   const publish = (e) => {
     e.preventDefault();
-    addAnnouncement(text, type);
+    if (!text.trim()) return;
+    addAnnouncement(text.trim(), type);
     setText("");
   };
 
@@ -41,7 +41,11 @@ export default function Admin() {
         <table>
           <thead>
             <tr>
-              <th>Company</th><th>Role</th><th>Package</th><th>Deadline</th><th>Action</th>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Package</th>
+              <th>Deadline</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +72,11 @@ export default function Admin() {
 
         <table>
           <thead>
-            <tr><th>Company</th><th>Role</th><th>Stage</th></tr>
+            <tr>
+              <th>Company</th>
+              <th>Role</th>
+              <th>Stage</th>
+            </tr>
           </thead>
           <tbody>
             {applications.map((a) => (
@@ -81,7 +89,9 @@ export default function Admin() {
                     onChange={(e) => updateStage(a.driveId, Number(e.target.value))}
                   >
                     {stages.map((s, i) => (
-                      <option key={s} value={i}>{s}</option>
+                      <option key={s} value={i}>
+                        {s}
+                      </option>
                     ))}
                   </select>
                 </td>
@@ -104,14 +114,25 @@ export default function Admin() {
             <option value="announcement">Announcement</option>
             <option value="deadline">Deadline</option>
             <option value="interview">Interview</option>
+            <option value="placement">Placement</option>
+            <option value="career">Career</option>
           </select>
-          <button type="submit" className="btn">Publish</button>
+          <button type="submit" className="btn">
+            Publish
+          </button>
         </form>
 
-        <ul className="notif-list">
+        <ul className="notif-list" style={{ marginTop: "1rem" }}>
           {announcements.map((a) => (
-            <li key={a.id} className={`notif ${a.type}`}>
-              {a.text}{" "}
+            <li
+              key={a.id}
+              className={`notif ${(a.type || "").toLowerCase()}`}
+              style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}
+            >
+              <div>
+                <strong>{a.title || (a.type ? a.type.toUpperCase() : "Announcement")}:</strong>{" "}
+                <span>{a.message || a.text}</span>
+              </div>
               <button className="btn btn-danger" onClick={() => deleteAnnouncement(a.id)}>
                 Delete
               </button>
