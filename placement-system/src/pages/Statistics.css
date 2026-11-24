@@ -1,5 +1,599 @@
-.bar-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.7rem; }
-.bar-label { width: 80px; font-size: 0.9rem; }
-.bar-track { flex: 1; background: var(--bg); border-radius: 6px; height: 18px; overflow: hidden; }
-.bar-fill { background: var(--accent); height: 100%; border-radius: 6px; }
-.bar-value { width: 30px; text-align: right; font-weight: 600; }
+/* =========================================================
+   Placement Statistics & Visual Graphs Styling
+   ========================================================= */
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Page Header Toolbar */
+.stats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  background: var(--card);
+  padding: 1.2rem 1.5rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.stats-header h2 {
+  margin: 0 0 0.2rem;
+  color: var(--primary);
+  font-size: 1.35rem;
+}
+
+.stats-season-toggle {
+  display: inline-flex;
+  background: var(--bg);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.season-btn {
+  background: transparent;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--muted);
+  font-weight: 500;
+  transition: all 0.15s ease;
+}
+
+.season-btn.active {
+  background: var(--card);
+  color: var(--primary);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================================================
+   Top KPI Cards Grid
+   ========================================================= */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.2rem;
+}
+
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.07);
+}
+
+.kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.4rem;
+}
+
+.kpi-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.kpi-icon {
+  font-size: 1.15rem;
+}
+
+.kpi-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0.2rem 0;
+}
+
+.kpi-sub {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.trend-badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.trend-badge.positive {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.trend-badge.neutral {
+  background: var(--bg);
+  color: var(--muted);
+}
+
+/* Circular Gauge Card */
+.gauge-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.gauge-wrapper {
+  position: relative;
+  width: 95px;
+  height: 95px;
+  flex-shrink: 0;
+}
+
+.gauge-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.gauge-bg-circle {
+  fill: none;
+  stroke: #e2e8f0;
+  stroke-width: 9;
+}
+
+.gauge-progress-circle {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-in-out;
+}
+
+.gauge-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gauge-number {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.1;
+}
+
+.gauge-sub {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.gauge-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gauge-info h4 {
+  margin: 0 0 0.2rem;
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+.gauge-info p {
+  margin: 0 0 0.4rem;
+  font-size: 0.78rem;
+}
+
+/* =========================================================
+   Live Placement Application Funnel
+   ========================================================= */
+
+.funnel-panel {
+  background: var(--card);
+}
+
+.panel-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.8rem;
+}
+
+.panel-header-row h3 {
+  margin: 0 0 0.2rem;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.funnel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.2rem;
+}
+
+.funnel-step {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.funnel-step.highlight-step {
+  border-color: var(--accent);
+  background: #f0f7f3;
+}
+
+.funnel-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.funnel-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.funnel-bar {
+  width: 100%;
+  height: 8px;
+  background: #e2e8e5;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0.3rem 0;
+}
+
+.funnel-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+.funnel-fill.selected-fill {
+  background: #2e7d32;
+}
+
+.funnel-meta {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* =========================================================
+   Two Column Charts Layout
+   ========================================================= */
+
+.charts-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.6rem;
+}
+
+.chart-header h3 {
+  margin: 0 0 0.2rem;
+  color: var(--primary);
+  font-size: 1.05rem;
+}
+
+.chart-tag {
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+
+/* Column Histogram Chart */
+.column-chart-container {
+  padding: 1rem 0.5rem 0.5rem;
+  width: 100%;
+}
+
+.column-chart {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.8rem;
+  height: 190px;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.column-chart-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+  cursor: pointer;
+}
+
+.column-bar-wrapper {
+  width: 100%;
+  max-width: 44px;
+  height: 140px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.column-bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 100%);
+  border-radius: 6px 6px 0 0;
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s ease;
+}
+
+.column-chart-item:hover .column-bar-fill {
+  transform: scaleY(1.04);
+  background: linear-gradient(180deg, #5ba371 0%, #234e35 100%);
+}
+
+.column-value-top {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.column-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-top: 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.column-sublabel {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.column-tooltip {
+  position: absolute;
+  top: -38px;
+  background: #1f2933;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.column-chart-item:hover .column-tooltip {
+  display: flex;
+}
+
+/* Horizontal Progress Bars Chart (Company-wise) */
+.horizontal-bars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.hbar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 85px;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hbar-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.hbar-company {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.hbar-role {
+  font-size: 0.7rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hbar-track {
+  width: 100%;
+  height: 22px;
+  background: var(--bg);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.hbar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4a8c5f 0%, #2f6943 100%);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  padding-left: 0.6rem;
+  transition: width 0.6s ease;
+}
+
+.hbar-inner-text {
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hbar-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.hbar-placed-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.hbar-ctc {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* Branch List Breakdown */
+.branch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.branch-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.branch-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.84rem;
+}
+
+.branch-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.branch-ratio {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.branch-track {
+  width: 100%;
+  height: 10px;
+  background: var(--bg);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.branch-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+
+/* History Table */
+.history-table-wrapper {
+  overflow-x: auto;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stats-table th {
+  background: var(--bg);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.6rem 0.8rem;
+}
+
+.stats-table td {
+  padding: 0.65rem 0.8rem;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.current-year-row {
+  background: #f4faf6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 900px) {
+  .charts-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .hbar-row {
+    grid-template-columns: 110px 1fr 65px;
+  }
+}
+
+@media (max-width: 600px) {
+  .column-chart {
+    gap: 0.4rem;
+  }
+
+  .column-label {
+    font-size: 0.68rem;
+  }
+
+  .hbar-row {
+    grid-template-columns: 90px 1fr 50px;
+  }
+}
